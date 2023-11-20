@@ -1,5 +1,6 @@
 import { ChangeEvent, useContext, useRef } from "react";
 import { PlacesContext } from "../context";
+import { SearchResults } from ".";
 
 export const SearchBar = () => {
   const { searchPlacesByTerm } = useContext(PlacesContext);
@@ -18,15 +19,17 @@ export const SearchBar = () => {
 
   return (
     <div
-      className="input-group mb-3 float-left mt-4 mx-4"
-      style={{ width: "250px" }}
+      className="rounded p-1 input-group float-left d-flex flex-column mt-4 mx-4"
+      style={{ width: "250px", backgroundColor: "white" }}
     >
       <input
         type="text"
-        className="form-control"
+        className="form-control w-100"
         placeholder="Buscar lugar"
         onChange={onQueryChange}
       />
+
+      <SearchResults />
     </div>
   );
 };
