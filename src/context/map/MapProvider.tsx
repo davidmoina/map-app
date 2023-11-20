@@ -3,6 +3,8 @@ import { MapContext } from "./MapContext";
 import { useContext, useEffect, useReducer } from "react";
 import { mapReducer } from "./MapReducer";
 import { PlacesContext } from "..";
+import { directionsApi } from "../../apis";
+import { DirectionsResponse } from "../../interfaces/directions";
 
 export interface MapState {
   isMapReady: boolean;
@@ -64,11 +66,30 @@ export const MapProvider = ({ children }: Props) => {
     dispatch({ type: "setMap", payload: map });
   };
 
+  const getRouteBetweenPoints = async (
+    start: [number, number],
+    end: [number, number]
+  ) => {
+    const response = await directionsApi.get<DirectionsResponse>(
+      `/${start.join(",")};${end.join(",")}`
+    );
+    const { distance, duration } = response.data.routes[0];
+
+    let kms = distance / 1000;
+    kms = Math.round(kms * 100);
+    kms /= 100;
+
+    const minutes = Math.floor(duration / 60);
+
+    console.log({ distance: kms, minutes });
+  };
+
   return (
     <MapContext.Provider
       value={{
         ...state,
         setMap,
+        getRouteBetweenPoints,
       }}
     >
       {children}
