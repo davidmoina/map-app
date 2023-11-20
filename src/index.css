@@ -11,3 +11,21 @@
 .pointer {
   cursor: pointer;
 }
+
+.custom-card {
+  max-width: 250px;
+  position: fixed;
+  top: 20px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+@media (max-width: 1024px) {
+  .custom-card {
+    bottom: 0;
+    top: auto;
+    left: auto;
+    right: 20px;
+  }
+}

@@ -4,6 +4,7 @@ import { createContext } from "react";
 interface MapContextProps {
   isMapReady: boolean;
   map?: Map;
+  routeInfo?: { distance: number; duration: number };
   setMap: (map: Map) => void;
   getRouteBetweenPoints: (
     start: [number, number],

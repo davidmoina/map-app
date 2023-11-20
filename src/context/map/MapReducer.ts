@@ -3,7 +3,8 @@ import { MapState } from "./MapProvider";
 
 type MapAction =
   | { type: "setMap"; payload: Map }
-  | { type: "setMarkers"; payload: Marker[] };
+  | { type: "setMarkers"; payload: Marker[] }
+  | { type: "setRouteInfo"; payload: { distance: number; duration: number } };
 
 export const mapReducer = (state: MapState, action: MapAction): MapState => {
   switch (action.type) {
@@ -18,6 +19,12 @@ export const mapReducer = (state: MapState, action: MapAction): MapState => {
       return {
         ...state,
         markers: action.payload,
+      };
+
+    case "setRouteInfo":
+      return {
+        ...state,
+        routeInfo: action.payload,
       };
 
     default:
